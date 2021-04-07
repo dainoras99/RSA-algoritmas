@@ -8,12 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Numerics;
+using System.IO;
 
 namespace RSA_algoritmas
 {
     public partial class Form1 : Form
     {
-        Encoding encoding = Encoding.GetEncoding("437");
         public Form1()
         {
             InitializeComponent();
@@ -28,18 +28,28 @@ namespace RSA_algoritmas
                 int q = Int32.Parse(qTextBox.Text);
                 Validation(p, q);
                 int n = p * q;
+
+                File.WriteAllText(@"D:\KOLEGIJOS MEDZIAGA\INFORMACIJOS SAUGUMAS\RSA algoritmas\file.txt", n.ToString());
+                StreamWriter streamWriter = new StreamWriter(@"D:\KOLEGIJOS MEDZIAGA\INFORMACIJOS SAUGUMAS\RSA algoritmas\file.txt", true);
+
                 int fn = (p - 1) * (q - 1);
                 int exponent = GetEValue(fn);
-                Console.WriteLine("n " + n);
-                Console.WriteLine("fn " + fn);
-                Console.WriteLine("e " + exponent);
-                Console.WriteLine("encrypted: " + Encryption(exponent, n, CreateAsciiDecimals(text)));
-                yTextBox.Text = Encryption(exponent, n, CreateAsciiDecimals(text));
+                IntWriteToFile(exponent, streamWriter);
+                yTextBox.Text = Encryption(exponent, n, CreateAsciiDecimals(text), streamWriter);
             }
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
             }
+        }
+        private void IntWriteToFile(int text, StreamWriter streamWriter)
+        {
+            streamWriter.WriteLine("\n" + text.ToString());
+        }
+        private void StringWriteToFile(string text, StreamWriter streamWriter)
+        {
+            streamWriter.WriteLine(text);
+            streamWriter.Close();
         }
         private void Validation(int p, int q)
         {
@@ -50,22 +60,28 @@ namespace RSA_algoritmas
             for (int i = 2; i < q; i++)
                 if (q % i == 0 && i != q)
                     throw new Exception("q must be a prime number");
+            if (p < 10 || q < 10)
+                throw new Exception("q and p cannot have a value below 10");
         }
         private int GetEValue(int fn)
         {
             for (int e = 2; e < fn; e++)
                 if (GCD(e, fn) == 1)
-                    if (e > 1)
-                        return e;
+                {
+                    int exponent = e;
+                    if (exponent > 1)
+                        return exponent;
+                }
             throw new Exception("e not found");
         }
         private int GCD(int a, int b)
         {
+            int temp = 0;
             while (b != 0)
             {
-                int temp = b;
-                b = a % b;
-                a = temp;
+                temp = a % b;
+                a = b;
+                b = temp;
             }
             return a;
         }
@@ -76,7 +92,7 @@ namespace RSA_algoritmas
                 AsciiDecimals.Add(a);
             return AsciiDecimals;
         }
-        private string Encryption(int exponent, int n, List<int> AsciiDecimals) 
+        private string Encryption(int exponent, int n, List<int> AsciiDecimals, StreamWriter streamWriter) 
         {
             string encryptedText = "";
             foreach (char a in AsciiDecimals)
@@ -85,6 +101,7 @@ namespace RSA_algoritmas
                 BigInteger encryptedChar = poweredByE % n;
                 encryptedText += (char)(encryptedChar);
             }
+            StringWriteToFile(encryptedText, streamWriter);
             return encryptedText;
         }
          
@@ -121,6 +138,28 @@ namespace RSA_algoritmas
             int exponent = GetEValue(fn);
             int d = privateKeyValue(fn, exponent);
             xTextBox.Text = Decryption(d, n, CreateAsciiDecimals(text));
+        }
+
+       
+
+        private void DecryptFromText_Click(object sender, EventArgs e)
+        {
+            string line;
+            List<string> parts = new List<string>();
+            StreamReader file = new StreamReader(@"D:\KOLEGIJOS MEDZIAGA\INFORMACIJOS SAUGUMAS\RSA algoritmas\file.txt");
+            while ((line = file.ReadLine()) != null)
+            {
+                parts.Add(line);
+            }
+            yTextBox.Text = parts[2];
+        }
+
+        private void cleanButton_Click(object sender, EventArgs e)
+        {
+            pTextBox.Text = "";
+            qTextBox.Text = "";
+            xTextBox.Text = "";
+            yTextBox.Text = "";
         }
     }
 }

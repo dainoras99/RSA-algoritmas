@@ -40,6 +40,8 @@ namespace RSA_algoritmas
             this.yTextBox = new System.Windows.Forms.TextBox();
             this.encryptButton = new System.Windows.Forms.Button();
             this.decryptButton = new System.Windows.Forms.Button();
+            this.cleanButton = new System.Windows.Forms.Button();
+            this.DecryptFromText = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -122,7 +124,7 @@ namespace RSA_algoritmas
             // 
             // encryptButton
             // 
-            this.encryptButton.Location = new System.Drawing.Point(156, 181);
+            this.encryptButton.Location = new System.Drawing.Point(141, 181);
             this.encryptButton.Name = "encryptButton";
             this.encryptButton.Size = new System.Drawing.Size(75, 23);
             this.encryptButton.TabIndex = 9;
@@ -132,7 +134,7 @@ namespace RSA_algoritmas
             // 
             // decryptButton
             // 
-            this.decryptButton.Location = new System.Drawing.Point(156, 280);
+            this.decryptButton.Location = new System.Drawing.Point(81, 279);
             this.decryptButton.Name = "decryptButton";
             this.decryptButton.Size = new System.Drawing.Size(75, 25);
             this.decryptButton.TabIndex = 10;
@@ -140,12 +142,34 @@ namespace RSA_algoritmas
             this.decryptButton.UseVisualStyleBackColor = true;
             this.decryptButton.Click += new System.EventHandler(this.decryptButton_Click);
             // 
+            // cleanButton
+            // 
+            this.cleanButton.Location = new System.Drawing.Point(141, 316);
+            this.cleanButton.Name = "cleanButton";
+            this.cleanButton.Size = new System.Drawing.Size(75, 43);
+            this.cleanButton.TabIndex = 11;
+            this.cleanButton.Text = "Valyti langelius";
+            this.cleanButton.UseVisualStyleBackColor = true;
+            this.cleanButton.Click += new System.EventHandler(this.cleanButton_Click);
+            // 
+            // DecryptFromText
+            // 
+            this.DecryptFromText.Location = new System.Drawing.Point(186, 279);
+            this.DecryptFromText.Name = "DecryptFromText";
+            this.DecryptFromText.Size = new System.Drawing.Size(123, 25);
+            this.DecryptFromText.TabIndex = 12;
+            this.DecryptFromText.Text = "Įkelti tekstą iš failo";
+            this.DecryptFromText.UseVisualStyleBackColor = true;
+            this.DecryptFromText.Click += new System.EventHandler(this.DecryptFromText_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(382, 325);
+            this.ClientSize = new System.Drawing.Size(382, 371);
+            this.Controls.Add(this.DecryptFromText);
+            this.Controls.Add(this.cleanButton);
             this.Controls.Add(this.decryptButton);
             this.Controls.Add(this.encryptButton);
             this.Controls.Add(this.label5);
@@ -177,6 +201,8 @@ namespace RSA_algoritmas
         private System.Windows.Forms.TextBox yTextBox;
         private System.Windows.Forms.Button encryptButton;
         private System.Windows.Forms.Button decryptButton;
+        private System.Windows.Forms.Button cleanButton;
+        private System.Windows.Forms.Button DecryptFromText;
     }
 }
 
