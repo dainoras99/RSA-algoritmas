@@ -33,8 +33,8 @@ namespace RSA_algoritmas
                 Console.WriteLine("n " + n);
                 Console.WriteLine("fn " + fn);
                 Console.WriteLine("e " + exponent);
-                Console.WriteLine("encrypted: " + Encryption(exponent, n, CreateXAsciiDecimals(text)));
-
+                Console.WriteLine("encrypted: " + Encryption(exponent, n, CreateAsciiDecimals(text)));
+                yTextBox.Text = Encryption(exponent, n, CreateAsciiDecimals(text));
             }
             catch (Exception exc)
             {
@@ -69,28 +69,28 @@ namespace RSA_algoritmas
             }
             return a;
         }
-        private List<int> CreateXAsciiDecimals(string text)
+        private List<int> CreateAsciiDecimals(string text)
         {
-            List<int> xAsciiDecimals = new List<int>();
+            List<int> AsciiDecimals = new List<int>();
             foreach (char a in text)
-                xAsciiDecimals.Add(a);
-            return xAsciiDecimals;
+                AsciiDecimals.Add(a);
+            return AsciiDecimals;
         }
-        private string Encryption(int exponent, int n, List<int> xAsciiDecimals) 
+        private string Encryption(int exponent, int n, List<int> AsciiDecimals) 
         {
             string encryptedText = "";
-            foreach (char a in xAsciiDecimals)
+            foreach (char a in AsciiDecimals)
             { 
-                BigInteger poweredE = BigInteger.Pow(a, exponent);
-                BigInteger decryptedChar = poweredE % n;
-                encryptedText += (char)(decryptedChar);
+                BigInteger poweredByE = BigInteger.Pow(a, exponent);
+                BigInteger encryptedChar = poweredByE % n;
+                encryptedText += (char)(encryptedChar);
             }
             return encryptedText;
         }
          
         private int privateKeyValue (int fn, int exponent)
         {
-            int d = 2;
+            int d = 1;
             while (d * exponent % fn != 1)
             {
                 d++;
@@ -98,5 +98,29 @@ namespace RSA_algoritmas
             return d;
         }
 
+        private string Decryption(int d, int n, List<int> AsciiDecimals)
+        {
+            string decryptedText = "";
+            foreach (char a in AsciiDecimals)
+            {
+                BigInteger poweredByD = BigInteger.Pow(a, d);
+                BigInteger decryptedChar = poweredByD % n;
+                decryptedText += (char)(decryptedChar);
+            }
+            return decryptedText;
+        }
+
+        private void decryptButton_Click(object sender, EventArgs e)
+        {
+            string text = yTextBox.Text;
+            int p = Int32.Parse(pTextBox.Text);
+            int q = Int32.Parse(qTextBox.Text);
+            Validation(p, q);
+            int n = p * q;
+            int fn = (p - 1) * (q - 1);
+            int exponent = GetEValue(fn);
+            int d = privateKeyValue(fn, exponent);
+            xTextBox.Text = Decryption(d, n, CreateAsciiDecimals(text));
+        }
     }
 }

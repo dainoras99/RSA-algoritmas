@@ -138,6 +138,7 @@ namespace RSA_algoritmas
             this.decryptButton.TabIndex = 10;
             this.decryptButton.Text = "Dešifruoti";
             this.decryptButton.UseVisualStyleBackColor = true;
+            this.decryptButton.Click += new System.EventHandler(this.decryptButton_Click);
             // 
             // Form1
             // 
