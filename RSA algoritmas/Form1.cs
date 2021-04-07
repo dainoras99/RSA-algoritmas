@@ -87,5 +87,16 @@ namespace RSA_algoritmas
             }
             return encryptedText;
         }
+         
+        private int privateKeyValue (int fn, int exponent)
+        {
+            int d = 2;
+            while (d * exponent % fn != 1)
+            {
+                d++;
+            }
+            return d;
+        }
+
     }
 }
