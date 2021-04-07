@@ -30,14 +30,14 @@ namespace RSA_algoritmas
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.p = new System.Windows.Forms.TextBox();
-            this.q = new System.Windows.Forms.TextBox();
+            this.pTextBox = new System.Windows.Forms.TextBox();
+            this.qTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.x = new System.Windows.Forms.TextBox();
+            this.xTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.y = new System.Windows.Forms.TextBox();
+            this.yTextBox = new System.Windows.Forms.TextBox();
             this.encryptButton = new System.Windows.Forms.Button();
             this.decryptButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -52,19 +52,19 @@ namespace RSA_algoritmas
             this.label1.TabIndex = 0;
             this.label1.Text = "RSA ALGORITMAS";
             // 
-            // p
+            // pTextBox
             // 
-            this.p.Location = new System.Drawing.Point(141, 51);
-            this.p.Name = "p";
-            this.p.Size = new System.Drawing.Size(100, 20);
-            this.p.TabIndex = 1;
+            this.pTextBox.Location = new System.Drawing.Point(141, 51);
+            this.pTextBox.Name = "pTextBox";
+            this.pTextBox.Size = new System.Drawing.Size(100, 20);
+            this.pTextBox.TabIndex = 1;
             // 
-            // q
+            // qTextBox
             // 
-            this.q.Location = new System.Drawing.Point(141, 77);
-            this.q.Name = "q";
-            this.q.Size = new System.Drawing.Size(100, 20);
-            this.q.TabIndex = 2;
+            this.qTextBox.Location = new System.Drawing.Point(141, 77);
+            this.qTextBox.Name = "qTextBox";
+            this.qTextBox.Size = new System.Drawing.Size(100, 20);
+            this.qTextBox.TabIndex = 2;
             // 
             // label2
             // 
@@ -86,12 +86,12 @@ namespace RSA_algoritmas
             this.label3.TabIndex = 4;
             this.label3.Text = "q:";
             // 
-            // x
+            // xTextBox
             // 
-            this.x.Location = new System.Drawing.Point(81, 155);
-            this.x.Name = "x";
-            this.x.Size = new System.Drawing.Size(249, 20);
-            this.x.TabIndex = 5;
+            this.xTextBox.Location = new System.Drawing.Point(81, 155);
+            this.xTextBox.Name = "xTextBox";
+            this.xTextBox.Size = new System.Drawing.Size(249, 20);
+            this.xTextBox.TabIndex = 5;
             // 
             // label4
             // 
@@ -113,12 +113,12 @@ namespace RSA_algoritmas
             this.label5.TabIndex = 8;
             this.label5.Text = "Norimas dešifruoti tekstas/užšifruotas tekstas:";
             // 
-            // y
+            // yTextBox
             // 
-            this.y.Location = new System.Drawing.Point(71, 253);
-            this.y.Name = "y";
-            this.y.Size = new System.Drawing.Size(249, 20);
-            this.y.TabIndex = 7;
+            this.yTextBox.Location = new System.Drawing.Point(71, 253);
+            this.yTextBox.Name = "yTextBox";
+            this.yTextBox.Size = new System.Drawing.Size(249, 20);
+            this.yTextBox.TabIndex = 7;
             // 
             // encryptButton
             // 
@@ -128,6 +128,7 @@ namespace RSA_algoritmas
             this.encryptButton.TabIndex = 9;
             this.encryptButton.Text = "Šifruoti";
             this.encryptButton.UseVisualStyleBackColor = true;
+            this.encryptButton.Click += new System.EventHandler(this.encryptButton_Click);
             // 
             // decryptButton
             // 
@@ -147,13 +148,13 @@ namespace RSA_algoritmas
             this.Controls.Add(this.decryptButton);
             this.Controls.Add(this.encryptButton);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.y);
+            this.Controls.Add(this.yTextBox);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.x);
+            this.Controls.Add(this.xTextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.q);
-            this.Controls.Add(this.p);
+            this.Controls.Add(this.qTextBox);
+            this.Controls.Add(this.pTextBox);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -165,14 +166,14 @@ namespace RSA_algoritmas
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox p;
-        private System.Windows.Forms.TextBox q;
+        private System.Windows.Forms.TextBox pTextBox;
+        private System.Windows.Forms.TextBox qTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox x;
+        private System.Windows.Forms.TextBox xTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox y;
+        private System.Windows.Forms.TextBox yTextBox;
         private System.Windows.Forms.Button encryptButton;
         private System.Windows.Forms.Button decryptButton;
     }

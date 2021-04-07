@@ -17,5 +17,60 @@ namespace RSA_algoritmas
             InitializeComponent();
         }
 
+        private void encryptButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string text = xTextBox.Text;
+                int p = Int32.Parse(pTextBox.Text);
+                int q = Int32.Parse(qTextBox.Text);
+                Validation(p, q);
+                int n = p * q;
+                int fn = (p - 1) * (q - 1);
+                int exponent = GetEValue(fn);
+                Console.WriteLine("n " + n);
+                Console.WriteLine("fn " + fn);
+                Console.WriteLine("e " + exponent);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+        }
+        private void Validation(int p, int q)
+        {
+            for (int i = 2; i < p; i++)
+                if (p % i == 0 && i != p)
+                    throw new Exception("p must be a prime number");
+
+            for (int i = 2; i < q; i++)
+                if (q % i == 0 && i != q)
+                    throw new Exception("q must be a prime number");
+        }
+        private int GetEValue(int fn)
+        {
+            for (int e = 2; e < fn; e++)
+                if (GCD(e, fn) == 1)
+                    if (e > 1)
+                        return e;
+            throw new Exception("e not found");
+        }
+        private int GCD(int a, int b)
+        {
+            while (b != 0)
+            {
+                int temp = b;
+                b = a % b;
+                a = temp;
+            }
+            return a;
+        }
+        private List<int> CreateXAsciiDecimals(string text)
+        {
+            List<int> xAsciiDecimals = new List<int>();
+            foreach (char a in text)
+                xAsciiDecimals.Add(a);
+            return xAsciiDecimals;
+        }
     }
 }
