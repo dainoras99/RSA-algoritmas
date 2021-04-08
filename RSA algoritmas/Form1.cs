@@ -36,6 +36,9 @@ namespace RSA_algoritmas
                 int exponent = GetEValue(fn);
                 IntWriteToFile(exponent, streamWriter);
                 yTextBox.Text = Encryption(exponent, n, CreateAsciiDecimals(text), streamWriter);
+                Console.WriteLine("n " + n);
+                Console.WriteLine("fn " + fn);
+                Console.WriteLine("e " + exponent);
             }
             catch (Exception exc)
             {
@@ -138,6 +141,7 @@ namespace RSA_algoritmas
             int exponent = GetEValue(fn);
             int d = privateKeyValue(fn, exponent);
             xTextBox.Text = Decryption(d, n, CreateAsciiDecimals(text));
+            Console.WriteLine("d " + d);
         }
 
        
