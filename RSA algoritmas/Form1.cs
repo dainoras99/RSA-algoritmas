@@ -155,7 +155,21 @@ namespace RSA_algoritmas
             {
                 parts.Add(line);
             }
+
+
+            int n = Int32.Parse(parts[0]);
+            int p = 2;
+            int q = 0;
+            while (n % p > 0) 
+            {
+                p++; 
+            }
+            q = n / p;
+
+            pTextBox.Text = p.ToString();
+            qTextBox.Text = q.ToString();
             yTextBox.Text = parts[2];
+
         }
 
         private void cleanButton_Click(object sender, EventArgs e)
